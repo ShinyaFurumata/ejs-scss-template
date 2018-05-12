@@ -7,7 +7,8 @@ var uglify = require("gulp-uglify");
 var concat = require("gulp-concat");
 var rename = require('gulp-rename');
 var sass = require("gulp-sass");
-var slim = require("gulp-slim");
+// var slim = require("gulp-slim");
+var ejs = require("gulp-ejs");
 var autoprefixer = require("gulp-autoprefixer");
 var cache = require('gulp-cached');
 var merge = require('merge-stream');
@@ -18,23 +19,39 @@ var gutil = require('gulp-util');
 var ftp = require('vinyl-ftp');
 
 /*--------------------- slim [slim] --------------------*/
-gulp.task('slim', function() {
-  var under = gulp.src(["./app/views/**/*.slim" , '!./app/views/partial/*.slim'])
-    .pipe(cache( 'slim' ))
+// gulp.task('slim', function() {
+//   var under = gulp.src(["./app/views/**/*.slim" , '!./app/views/partial/*.slim'])
+//     .pipe(cache( 'slim' ))
+//     .pipe(plumber())
+//     .pipe(slim({
+//       pretty: true,
+//       require: 'slim/include',
+//       options: 'include_dirs=["./app/views/partial"]'
+//     }))
+//     .pipe(gulp.dest('./public/'))
+
+//     var top =  gulp.src('./app/views/index.slim')
+//     .pipe(slim({
+//       pretty: true,
+//       require: 'slim/include',
+//       options: 'include_dirs=["./app/views/partial"]'
+//     }))
+//     .pipe(gulp.dest('./public/'))
+//     .pipe(browser.reload({stream:true}));
+
+//     return merge(under, top);
+// });
+
+/*--------------------- ejs [ejs] --------------------*/
+gulp.task('ejs', function() {
+  var under = gulp.src(["./app/views/**/*.ejs" , '!./app/views/partial/*.ejs'])
+    .pipe(cache( 'ejs' ))
     .pipe(plumber())
-    .pipe(slim({
-      pretty: true,
-      require: 'slim/include',
-      options: 'include_dirs=["./app/views/partial"]'
-    }))
+    .pipe(ejs({ msg: 'compiled!'}, {}, { ext: '.html' }))
     .pipe(gulp.dest('./public/'))
 
-    var top =  gulp.src('./app/views/index.slim')
-    .pipe(slim({
-      pretty: true,
-      require: 'slim/include',
-      options: 'include_dirs=["./app/views/partial"]'
-    }))
+    var top =  gulp.src('./app/views/index.ejs')
+    .pipe(ejs({ msg: 'compiled!'}, {}, { ext: '.html' }))
     .pipe(gulp.dest('./public/'))
     .pipe(browser.reload({stream:true}));
 
@@ -43,7 +60,7 @@ gulp.task('slim', function() {
 
 /*--------------------- sass [sass] --------------------*/
 gulp.task("sass", function() {
-  gulp.src("./app/stylesheets/application.sass")
+  gulp.src("./app/stylesheets/application.scss")
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(sass({pretty: true}))
@@ -131,10 +148,10 @@ gulp.task('bower', function() {
 
 /*--------------------- watch --------------------*/
 gulp.task('watch', function () {
-    gulp.watch(['./app/views/**/*.slim','./app/views/partial/*.slim'],['slim']);
-    gulp.watch("./app/**/*.sass", ['sass']);
+    gulp.watch(['./app/views/**/*.ejs','./app/views/partial/*.ejs'],['ejs']);
+    gulp.watch("./app/**/*.scss", ['sass']);
     gulp.watch("./app/javascripts/*.js", ['jsmin']);
 });
 
 /*--------------------- default [gulp] --------------------*/
-gulp.task('default', ['server' , 'watch' , 'bower' ,'imagemin' ,'slim'] );
+gulp.task('default', ['server' , 'watch' , 'bower' ,'imagemin' ,'ejs', 'sass'] );
