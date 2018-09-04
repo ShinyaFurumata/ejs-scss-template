@@ -14,7 +14,7 @@ Bower: [bower.io](https://bower.io/)
 
 SASS: [sass-lang.com](http://sass-lang.com)
 
-Slim: [http://slim-lang.com/](http://slim-lang.com/)
+ejs: [http://ejs.co/](http://ejs.co/)
 
 # directory Structure #
 ```
@@ -40,13 +40,13 @@ Slim: [http://slim-lang.com/](http://slim-lang.com/)
 　│
 　└・views
 　　　├・partial
-　　　│　├・header.slim
-　　　│　├・head.slim
-　　　│　├・footer.slim
-　　　│　└・side.slim
+　　　│　├・header.ejs
+　　　│　├・head.ejs
+　　　│　├・footer.ejs
+　　　│　└・side.ejs
 　　　├・page_name
-　　　│　└・index.slim
-　　　└・index.slim
+　　　│　└・index.ejs
+　　　└・index.ejs
 ・public
 
 ```
@@ -64,7 +64,7 @@ bower install
 ```
 
 # Using the build #
-Automated Slim and SASS building:
+Automated ejs and SASS building:
 ```
 gulp
 ```
