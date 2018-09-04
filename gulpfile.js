@@ -1,10 +1,7 @@
 var gulp = require("gulp");
 var plumber = require("gulp-plumber");
 var browser = require("browser-sync");
-var bower = require('main-bower-files');
-var gulpFilter = require('gulp-filter');
 var uglify = require("gulp-uglify");
-var concat = require("gulp-concat");
 var rename = require('gulp-rename');
 var sass = require("gulp-sass");
 var ejs = require("gulp-ejs");
@@ -86,28 +83,6 @@ gulp.task("server", function() {
     });
 });
 
-/*--------------------- bower [bower] --------------------*/
-gulp.task('bower', function() {
-  var jsDir = './app/javascripts/',
-      jsFilter = gulpFilter('**/*.js', {restore: true});
-  return gulp.src( bower({
-      paths: {
-        bowerJson: 'bower.json'
-      }
-    }) )
-    .pipe( jsFilter )
-    .pipe( concat('_bundle.js') )
-    .pipe( gulp.dest(jsDir) )
-    .pipe( uglify({
-      preserveComments: 'some'
-    }) )
-    .pipe( rename({
-      extname: '.min.js'
-    }) )
-    .pipe( gulp.dest('./public/js/') )
-    .pipe( jsFilter.restore );
-});
-
 /*--------------------- watch --------------------*/
 gulp.task('watch', function () {
     gulp.watch(['./app/views/**/*.ejs','./app/views/partial/*.ejs'],['ejs']);
@@ -116,4 +91,4 @@ gulp.task('watch', function () {
 });
 
 /*--------------------- default [gulp] --------------------*/
-gulp.task('default', ['server' , 'watch' , 'bower' ,'imagemin' ,'ejs', 'sass'] );
+gulp.task('default', ['server' , 'watch' ,'imagemin' ,'ejs', 'sass'] );

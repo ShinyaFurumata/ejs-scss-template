@@ -10,8 +10,6 @@ NPM (recommended): [npmjs.com](http://npmjs.com)
 
 Gulp: [gulpjs.com](http://gulpjs.com/)
 
-Bower: [bower.io](https://bower.io/)
-
 SASS: [sass-lang.com](http://sass-lang.com)
 
 ejs: [http://ejs.co/](http://ejs.co/)
@@ -29,8 +27,8 @@ ejs: [http://ejs.co/](http://ejs.co/)
 　│　└ _under
 　│
 　├・javascripts
-　│　├・_bundle.js
 　│　└・common.js
+　│　
 　│
 　├・stylesheets
 　│　├・base
@@ -56,11 +54,6 @@ ejs: [http://ejs.co/](http://ejs.co/)
 install Node Packages with NPM
 ```
 npm install
-```
-
-install Bower Packages with NPM
-```
-bower install
 ```
 
 # Using the build #
